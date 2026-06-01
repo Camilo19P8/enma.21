@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1029484641583",
+    "project_id": "enma-f8fbf",
+    "storage_bucket": "enma-f8fbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029484641583:android:18ff79eb619001177bb5da",
+        "android_client_info": {
+          "package_name": "enma.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWyJe_NW7K4PVyhyP-Rc3AmJ1_yb9bpJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
