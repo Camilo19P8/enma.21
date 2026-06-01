@@ -259,25 +259,29 @@ ${weatherContext.isEmpty ? '' : weatherContext}
   }
 
   bool _isUnauthorizedError(String message) {
-    return message.contains('401') ||
-        message.contains('unauthorized') ||
-        message.contains('invalid api key') ||
-        message.contains('api key');
+    final lower = message.toLowerCase();
+    return lower.contains('401') ||
+        lower.contains('unauthorized') ||
+        lower.contains('invalid api key') ||
+        lower.contains('api key');
   }
 
   bool _isQuotaOrRateLimitError(String message) {
-    return message.contains('429') ||
-        message.contains('rate limit') ||
-        message.contains('quota') ||
-        message.contains('too many requests');
+    final lower = message.toLowerCase();
+    return lower.contains('429') ||
+        lower.contains('rate limit') ||
+        lower.contains('quota') ||
+        lower.contains('too many requests');
   }
 
   bool _isModelUnavailableError(String message) {
-    return message.contains('404') ||
-        message.contains('model') &&
-            (message.contains('not found') ||
-                message.contains('does not exist'));
+    final lower = message.toLowerCase();
+    return lower.contains('404') ||
+        lower.contains('model') &&
+            (lower.contains('not found') ||
+                lower.contains('does not exist'));
   }
+
 
   Future<http.Response> _postCompletion({
     required String model,
