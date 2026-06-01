@@ -216,9 +216,16 @@ ${weatherContext.isEmpty ? '' : weatherContext}
     final defaultCandidates = isXai ? _defaultXaiModelCandidates : _defaultGroqModelCandidates;
 
     var dotenvModel = dotenv.env['GROQ_MODEL']?.trim() ?? '';
-    if (dotenvModel == 'grok-beta') {
-      dotenvModel = 'grok-2';
+    if (isXai) {
+      if (dotenvModel.isEmpty || dotenvModel == 'grok-beta') {
+        dotenvModel = 'grok-2';
+      }
+    } else {
+      if (dotenvModel.isEmpty || dotenvModel.toLowerCase().contains('grok')) {
+        dotenvModel = 'llama-3.3-70b-versatile';
+      }
     }
+
     if (dotenvModel.isNotEmpty) {
       final isCompatible = isXai
           ? dotenvModel.toLowerCase().contains('grok')
@@ -233,9 +240,16 @@ ${weatherContext.isEmpty ? '' : weatherContext}
     }
 
     var configModel = _configuredModel.trim();
-    if (configModel == 'grok-beta') {
-      configModel = 'grok-2';
+    if (isXai) {
+      if (configModel.isEmpty || configModel == 'grok-beta') {
+        configModel = 'grok-2';
+      }
+    } else {
+      if (configModel.isEmpty || configModel.toLowerCase().contains('grok')) {
+        configModel = 'llama-3.3-70b-versatile';
+      }
     }
+
     if (configModel.isNotEmpty) {
       final isCompatible = isXai
           ? configModel.toLowerCase().contains('grok')
