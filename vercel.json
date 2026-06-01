@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "if [ ! -d \"flutter\" ]; then git clone https://github.com/flutter/flutter.git --depth 1 -b 3.35.6; fi && echo \"GROQ_API_KEY=$GROQ_API_KEY\" > .env && echo \"GROQ_MODEL=$GROQ_MODEL\" >> .env && ./flutter/bin/flutter config --enable-web && ./flutter/bin/flutter build web --release",
+  "buildCommand": "sh build.sh",
   "outputDirectory": "build/web"
 }
