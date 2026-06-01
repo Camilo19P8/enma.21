@@ -215,7 +215,10 @@ ${weatherContext.isEmpty ? '' : weatherContext}
     final isXai = apiKey.startsWith('xai-');
     final defaultCandidates = isXai ? _defaultXaiModelCandidates : _defaultGroqModelCandidates;
 
-    final dotenvModel = dotenv.env['GROQ_MODEL']?.trim() ?? '';
+    var dotenvModel = dotenv.env['GROQ_MODEL']?.trim() ?? '';
+    if (dotenvModel == 'grok-beta') {
+      dotenvModel = 'grok-2';
+    }
     if (dotenvModel.isNotEmpty) {
       final isCompatible = isXai
           ? dotenvModel.toLowerCase().contains('grok')
@@ -229,16 +232,20 @@ ${weatherContext.isEmpty ? '' : weatherContext}
       }
     }
 
-    if (_configuredModel.trim().isNotEmpty) {
+    var configModel = _configuredModel.trim();
+    if (configModel == 'grok-beta') {
+      configModel = 'grok-2';
+    }
+    if (configModel.isNotEmpty) {
       final isCompatible = isXai
-          ? _configuredModel.trim().toLowerCase().contains('grok')
-          : (_configuredModel.trim().toLowerCase().contains('llama') ||
-              _configuredModel.trim().toLowerCase().contains('mixtral'));
+          ? configModel.toLowerCase().contains('grok')
+          : (configModel.toLowerCase().contains('llama') ||
+              configModel.toLowerCase().contains('mixtral'));
       if (isCompatible) {
         return [
-          _configuredModel.trim(),
+          configModel,
           ...defaultCandidates.where(
-            (model) => model != _configuredModel.trim(),
+            (model) => model != configModel,
           ),
         ];
       }
